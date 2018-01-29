@@ -1,0 +1,7 @@
+site_name: Lot18 Wine Information API <nobr>v0.0.1b</nobr>
+theme: readthedocs
+pages:
+    - 'Introduction': index.md
+    - 'Vintage Information': vintages.md
+    - 'Wine Information': wines.md
+    
