@@ -3,6 +3,8 @@ Flask==0.12.2
 itsdangerous==0.24
 Jinja2==2.10
 MarkupSafe==1.0
+marshmallow==2.15.0
+marshmallow-jsonapi==0.16.0
 pbr==3.0.1
 pip==9.0.1
 setuptools==28.8.0
