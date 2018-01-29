@@ -70,7 +70,7 @@ Attribute Name  | Field Type | Description
 label           | String     | The image of the label
 bottle          | String     | The image of the full bottle
 
-#### Sample Bottle SKU
+#### Sample Vintage Information
 
 ```
 "data": {
@@ -122,7 +122,7 @@ bottle          | String     | The image of the full bottle
 }
 ```
 
-## Get info about multiple skus
+## Get info about multiple vintages
 ### `GET /vintages`
 
 You can pass a list of `vintage_id`s to this endpoint to get a list
