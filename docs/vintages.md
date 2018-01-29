@@ -73,41 +73,52 @@ bottle          | String     | The image of the full bottle
 #### Sample Bottle SKU
 
 ```
-{
-     "vintage_id": 1,
-     "year": 2015,
-     "short_tasting_note": "Aromas of strawberry, raspberry, cherry and flowers waft from the glass, followed by more of the same flavors on the palate.",
-     "tasting_note": "This lovely, floral rosé delights with strawberry, raspberry, cherry flavors, a soft and balanced acidity, and more bright, red fruits on the finish. The grapes were gently pressed as whole clusters before aging in stainless steel to maintain the beautiful fruit and floral aromatics.",
+"data": {
+     "type": "vintages",
+     "id": "1",
      "attributes": {
-         "body": 3,
-         "fruit": 3,
-         "earth": null,
-         "tannin": null,
-         "oak": 1,
-         "acidity": 3
-     },
-     "region": ["Monterey", "Central Coast", "California", "United States"],
-     "grapes": ["Pinot Noir"],
-     "tastes": ["cherry", "flowers", "raspberry jam", "tropical fruit"],
-     "pairings": ["Asian cuisines", "light salads", "brunch and desserts"],
-     "traits": ["Bold"],
-     "wine": {
-         "name": "2015 The Brink Monterey County Pinot Noir Rosé",
-         "brand": "The Brink",
-         "variety": {
-             "name": "Pinot Noir Rosé",
-             "type": "rosé"
-         }
-         "classification": {
-             "name": "Pinot Noir Rosé",
-             "type": "rosé"
-         }
+         "year": 2015,
+         "short_tasting_note": "Aromas of strawberry, raspberry, cherry and flowers waft from the glass, followed by more of the same flavors on the palate.",
+         "tasting_note": "This lovely, floral rosé delights with strawberry, raspberry, cherry flavors, a soft and balanced acidity, and more bright, red fruits on the finish. The grapes were gently pressed as whole clusters before aging in stainless steel to maintain the beautiful fruit and floral aromatics.",
+         "attributes": {
+             "body": 3,
+             "fruit": 3,
+             "earth": null,
+             "tannin": null,
+             "oak": 1,
+             "acidity": 3
+         },
+         "region": ["Monterey", "Central Coast", "California", "United States"],
+         "grapes": ["Pinot Noir"],
+         "tastes": ["cherry", "flowers", "raspberry jam", "tropical fruit"],
+         "pairings": ["Asian cuisines", "light salads", "brunch and desserts"],
+         "traits": ["Bold"],
      }
-     "image_urls": {
-         "label": "https://s3.amazonaws.com/lot18-partner/HelloFresh+Images/01IE000000LZyt_label.jpeg",
-         "bottle": "https://s3.amazonaws.com/lot18-partner/HelloFresh+Images/01IE000000LZyt_bottle.png",
-         "bottle_thumb": "https://s3.amazonaws.com/lot18-partner/HelloFresh+Images/01IE000000LZyt_bottle_thumb.png"
-     }
+     "relationships": {
+         "wine": {
+             "name": "2015 The Brink Monterey County Pinot Noir Rosé",
+             "brand": "The Brink",
+             "variety": {
+                 "name": "Pinot Noir Rosé",
+                 "type": "rosé"
+             }
+             "classification": {
+                 "name": "Pinot Noir Rosé",
+                 "type": "rosé"
+             }
+             "data": {"type": "wines", "id": "9"}
+         }
+         "image_urls": {
+             "label": "https://s3.amazonaws.com/lot18-partner/HelloFresh+Images/01IE000000LZyt_label.jpeg",
+             "bottle": "https://s3.amazonaws.com/lot18-partner/HelloFresh+Images/01IE000000LZyt_bottle.png",
+             "bottle_thumb": "https://s3.amazonaws.com/lot18-partner/HelloFresh+Images/01IE000000LZyt_bottle_thumb.png"
+             "data": [
+                 {"type": "urls", "id": "5"},
+                 {"type": "urls", "id": "6"},
+                 {"type": "urls", "id": "7"}
+             ]
+         }
+    }
 }
 ```
 
