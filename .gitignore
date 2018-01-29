@@ -49,6 +49,7 @@ react/npm-debug.log*
 *.swp
 
 .DS_Store
+.gitignore
 
 # VSCode Config
 .vscode
