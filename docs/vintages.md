@@ -128,7 +128,7 @@ bottle          | String     | The image of the full bottle
 You can pass a list of `vintage_id`s to this endpoint to get a list
 of information about vintages. The information is the same as in the response above.
 
-For example, `GET /skus?vintage_id=1,2`
+For example, `GET /vintages?vintage_id=1,2`
 
 #### Request
 
