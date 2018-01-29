@@ -3,3 +3,5 @@ theme: readthedocs
 pages:
     - 'Introduction': index.md
     - 'Vintage Information': vintages.md
+    - 'Wine Information': wines.md
+    
