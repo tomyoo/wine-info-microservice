@@ -3,7 +3,7 @@
 This endpoint retrieves detailed data about wine(s) and the corresponding characteristics.
 
 ## Get Wine information
-### `GET /Wine/<id>`
+### `GET /wines/<id>`
 
 Retrieves all information about a wine.
 
