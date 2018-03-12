@@ -1,0 +1,13 @@
+{
+  "id": 42069,
+  "name": "Bepis Wine",
+  "brand": "Bepis",
+  "variety": {
+    "name": "Primitivo",
+    "type": "red"
+  },
+  "classification": {
+    "name": "Primitivo",
+    "type": "red"
+  }
+}

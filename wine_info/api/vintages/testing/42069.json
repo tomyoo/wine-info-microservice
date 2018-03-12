@@ -1,0 +1,37 @@
+{
+  "id": 42069,
+  "year": 1969,
+  "short_tasting_note": "This is not Pepsi.",
+  "tasting_note": "This is not Pepsi. This is Bepis.",
+  "abv": 12.5,
+  "attributes": {
+    "body": 1,
+    "fruit": 2,
+    "earth": 3,
+    "tannin": 4,
+    "oak": null,
+    "acidity": null
+  },
+  "region": ["Puglia", "Italy"],
+  "grapes": ["Primitivo"],
+  "tastes": ["citrus peel", "juicy red fruit", "leather", "maraschino cherry", "plum"],
+  "pairings": ["braised meats", "burgers", "charcuterie", "cured meats", "hard cheeses", "pork dishes"],
+  "traits": ["bold"],
+  "wine": {
+    "name": "Bepis Wine",
+    "brand": "Bepis",
+    "variety": {
+      "name": "Primitivo",
+      "type": "red"
+    },
+    "classification": {
+      "name": "Primitivo",
+      "type": "red"
+    }
+  },
+  "image_urls": {
+    "label_url": "https://i.imgur.com/TDp9N2X.png",
+    "bottle_url": "https://i.imgur.com/TDp9N2X.png",
+    "bottle_thumb_url": "https://i.imgur.com/TDp9N2X.png"
+  }
+}

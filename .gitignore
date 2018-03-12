@@ -1,0 +1,10 @@
+.idea
+dist
+*egg*
+*.table
+*.pyc
+logs/
+.coverage
+settings.cfg
+build/
+.DS_STORE
