@@ -6,6 +6,10 @@ from flask_restful import Api, Resource
 from ..common.failures import Failures
 from ..exceptions import ApiException
 
+from ...extensions import db
+
+from .service import get_wine_by_id
+
 from .schema import WineSchema
 
 
@@ -24,7 +28,7 @@ class WineResource(Resource):
         if int(wine_id) == 42070:
             raise ApiException(Failures.other_error)
 
-        if int(wine_id) == 42069:
+        elif int(wine_id) == 42069:
             with open(os.path.dirname(os.path.abspath(__file__)) +
                       '/testing/42069.json'.format(wine_id),
                       'rb') as jsonfile:
@@ -35,13 +39,5 @@ class WineResource(Resource):
             response, response_errors = schema.loads(wines_json)
             return response
 
-        """
-        with open(os.path.dirname(os.path.abspath(__file__)) +
-                  '/json/{0}.json'.format(wine_id), 'rb') as jsonfile:
-            wines_json = jsonfile.read().decode("utf-8")
-
-        schema = WineSchema()
-
-        response, response_errors = schema.loads(wines_json)
-        return response
-        """
+        else:
+            pass

@@ -24,7 +24,7 @@ class VintageResource(Resource):
         if int(vintage_id) == 42070:
             raise ApiException(Failures.other_error)
 
-        if int(vintage_id) == 42069:
+        elif int(vintage_id) == 42069:
             with open(os.path.dirname(os.path.abspath(__file__)) +
                       '/testing/42069.json'.format(vintage_id),
                       'rb') as jsonfile:
@@ -35,14 +35,5 @@ class VintageResource(Resource):
             response, response_errors = schema.loads(vintages_json)
             return response
 
-        """
-        with open(os.path.dirname(os.path.abspath(__file__)) +
-                  '/json/{0}.json'.format(vintage_id), 'rb') as jsonfile:
-            vintages_json = jsonfile.read().decode("utf-8")
-
-        schema = VintageSchema()
-
-        response, response_errors = schema.loads(vintages_json)
-
-        return response
-        """
+        else:
+            pass
