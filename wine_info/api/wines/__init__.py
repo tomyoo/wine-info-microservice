@@ -1,4 +1,5 @@
 import os
+import json
 
 from flask import Blueprint, request, current_app
 from flask_restful import Api, Resource
@@ -40,4 +41,21 @@ class WineResource(Resource):
             return response
 
         else:
-            pass
+            wine = get_wine_by_id(wine_id)
+            wine_dict = {'id': wine.id,
+                         'name': wine.name,
+                         'brand': wine.brand.name,
+                         'variety': {
+                             'name': wine.variety.name,
+                             'type': wine.variety.type.value
+                         },
+                         'classification': {
+                             'name': wine.classification.name,
+                             'type': wine.classification.type.value
+                         }}
+            wine_json = json.dumps(wine_dict)
+
+            schema = WineSchema()
+
+            response, response_errors = schema.loads(wine_json)
+            return response
