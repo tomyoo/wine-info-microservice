@@ -5,9 +5,10 @@ from ..extensions import db
 
 class Brand(db.Model):
     __tablename__ = 'brands'
+    __table_args__ = {'extend_existing': True}
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
+    name = db.Column(db.String(100))
 
 
 class WineTypes(enum.Enum):
@@ -19,25 +20,28 @@ class WineTypes(enum.Enum):
 
 class Classification(db.Model):
     __tablename__ = 'classifications'
+    __table_args__ = {'extend_existing': True}
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
+    name = db.Column(db.String(100))
     type = db.Column(db.Enum(WineTypes))
 
 
 class Variety(db.Model):
     __tablename__ = 'varieties'
+    __table_args__ = {'extend_existing': True}
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
+    name = db.Column(db.String(100))
     type = db.Column(db.Enum(WineTypes))
 
 
 class Wine(db.Model):
     __tablename__ = 'wines'
+    __table_args__ = {'extend_existing': True}
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
+    name = db.Column(db.String(100))
     brand_id = db.Column(db.Integer, db.ForeignKey('brands.id'))
     brand = db.relationship('Brand', foreign_keys=brand_id)
 

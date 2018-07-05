@@ -9,7 +9,7 @@ from ..exceptions import ApiException
 
 from .schema import VintageSchema
 
-from .service import get_vintage_by_id
+from .service import get_vintage_by_id, get_region_by_id
 
 
 # named Blueprint object, so as to be registered by the app factory
@@ -43,6 +43,26 @@ class VintageResource(Resource):
 
             vintage = get_vintage_by_id(vintage_id)
 
+            regions = [vintage.region.name]
+            if vintage.region.parent_id:
+                regions.append(get_region_by_id(vintage.region.parent_id).name)
+
+            grapes = []
+            for grape in vintage.grapes:
+                grapes.append(grape.name)
+
+            tastes = []
+            for taste in vintage.tastes:
+                tastes.append(taste.name)
+
+            pairings = []
+            for pairing in vintage.pairings:
+                pairings.append(pairing.name)
+
+            traits = []
+            for trait in vintage.traits:
+                traits.append(trait.name)
+
             wine_dict = {'id': vintage.id,
                          'year': vintage.year,
                          'short_tasting_note': vintage.short_tasting_note,
@@ -56,11 +76,11 @@ class VintageResource(Resource):
                              'oak': vintage.oak,
                              'acidity': vintage.acidity
                          },
-                         'region': [vintage.regions],
-                         'grapes': [vintage.grapes],
-                         'taste': [vintage.tastes],
-                         'pairing': [vintage.pairings],
-                         'trait': [vintage.traits],
+                         'region': regions,
+                         'grapes': grapes,
+                         'tastes': tastes,
+                         'pairings': pairings,
+                         'traits': traits,
                          'wine': {
                              'name': vintage.wine.name,
                              'brand': vintage.wine.brand.name,

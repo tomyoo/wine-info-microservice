@@ -24,61 +24,64 @@ vintages_traits = db.Table('vintages_traits',
                            db.Column('vintage_id', db.Integer,
                                      db.ForeignKey('vintages.id')))
 
-
-class Brand(db.Model):
-    __tablename__ = 'brands'
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
-
-
-class WineTypes(enum.Enum):
-    red = 'red'
-    white = 'white'
-    rose = u'rosé'
-    sparkling = 'sparkling'
+vintages_grapes = db.Table('vintages_grapes',
+                           db.Column('grape_id', db.Integer,
+                                     db.ForeignKey('grapes.id')),
+                           db.Column('vintage_id', db.Integer,
+                                     db.ForeignKey('vintages.id')))
 
 
-class Classification(db.Model):
-    __tablename__ = 'classifications'
+class Taste(db.Model):
+    __tablename__ = 'tastes'
+    __table_args__ = {'extend_existing': True}
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
-    type = db.Column(db.Enum(WineTypes))
+    name = db.Column(db.String(100))
 
 
-class Variety(db.Model):
-    __tablename__ = 'varieties'
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
-    type = db.Column(db.Enum(WineTypes))
-
-
-class Wine(db.Model):
-    __tablename__ = 'wines'
+class Pairing(db.Model):
+    __tablename__ = 'pairings'
+    __table_args__ = {'extend_existing': True}
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
-    brand_id = db.Column(db.Integer, db.ForeignKey('brands.id'))
-    brand = db.relationship('Brand', foreign_keys=brand_id)
+    name = db.Column(db.String(100))
 
-    variety_id = db.Column(db.Integer, db.ForeignKey('varieties.id'))
-    variety = db.relationship('Variety', foreign_keys=variety_id)
 
-    classification_id = db.Column(db.Integer,
-                                  db.ForeignKey('classifications.id'))
-    classification = db.relationship('Classification',
-                                     foreign_keys=classification_id)
+class Trait(db.Model):
+    __tablename__ = 'traits'
+    __table_args__ = {'extend_existing': True}
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    
+    
+class Grape(db.Model):
+    __tablename__ = 'grapes'
+    __table_args__ = {'extend_existing': True}
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+
+
+class Region(db.Model):
+    __tablename__ = 'regions'
+    __table_args__ = {'extend_existing': True}
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    parent_id = db.Column(db.Integer, nullable=True)
 
 
 class Vintage(db.Model):
     __tablename__ = 'vintages'
+    __table_args__ = {'extend_existing': True}
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
     year = db.Column(db.Integer)
     abv = db.Column(db.Float)
+
+    tasting_note = db.Column(db.Text)
+    short_tasting_note = db.Column(db.Text)
 
     body = db.Column(db.Integer)
     fruit = db.Column(db.Integer)
@@ -93,9 +96,7 @@ class Vintage(db.Model):
     tastes = db.relationship('Taste', secondary=vintages_tastes)
     pairings = db.relationship('Pairing', secondary=vintages_pairings)
     traits = db.relationship('Trait', secondary=vintages_traits)
-    stats = db.relationship('WineStat', secondary='wine_stats_vintages')
-    similar_wines = db.relationship('SimilarWine',
-                                    order_by='SimilarWine.cluster_match')
+    grapes = db.relationship('Grape', secondary=vintages_grapes)
 
     wine_id = db.Column(db.Integer, db.ForeignKey('wines.id'))
     wine = db.relationship('Wine', foreign_keys=wine_id)

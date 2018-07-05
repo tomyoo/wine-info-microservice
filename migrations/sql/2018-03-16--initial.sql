@@ -72,7 +72,8 @@ CREATE TABLE `vintage_grapes` (
 
 CREATE TABLE `vintage_image_urls` (
   `image_url_id` int(11) DEFAULT NULL,
-  `vintage_id` int(11) DEFAULT NULL
+  `vintage_id` int(11) DEFAULT NULL,
+  `type` enum('label','bottle','bottle_thumb') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

@@ -1,4 +1,4 @@
-from wine_info.extensions import schemas
+from ...extensions import schemas
 
 
 class VarietySchema(schemas.Schema):

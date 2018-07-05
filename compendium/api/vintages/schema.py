@@ -1,4 +1,4 @@
-from wine_info.extensions import schemas
+from ...extensions import schemas
 
 
 class AttributeSchema(schemas.Schema):
@@ -24,6 +24,22 @@ class VarietySchema(schemas.Schema):
 class ClassificationSchema(schemas.Schema):
     name = schemas.String()
     type = schemas.String()
+
+
+class GrapeSchema(schemas.Schema):
+    name = schemas.String()
+
+
+class TasteSchema(schemas.Schema):
+    name = schemas.String()
+
+
+class PairingSchema(schemas.Schema):
+    name = schemas.String()
+
+
+class TraitSchema(schemas.Schema):
+    name = schemas.String()
 
 
 class WineSchema(schemas.Schema):

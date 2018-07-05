@@ -3,13 +3,11 @@ from flask import Flask
 from .configure_logging import configure_logging
 from .initialize_extensions import initialize_extensions
 from .register_blueprints import register_blueprints
-from .. import config
-from ..clib.paths import project_path
 from ..extensions import schemas, db, statsd
 
 
 def create_app(package_name, package_path, settings_override=None,
-               extensions=None):
+               extensions=None, env='dev'):
     """Returns a :class:`Flask` application instance configured with common
     functionality for this application.
 
@@ -21,8 +19,8 @@ def create_app(package_name, package_path, settings_override=None,
         initialize on the app
     """
     app = Flask(package_name)
-    app.config.from_object(config.Common())
-    app.config.from_pyfile(project_path('settings.cfg'), silent=True)
+    # Load environment specific configuration
+    app.config.from_pyfile('config/%s.py' % env)
 
     if isinstance(settings_override, str):
         app.config.from_pyfile(settings_override, silent=True)
@@ -34,6 +32,6 @@ def create_app(package_name, package_path, settings_override=None,
 
     initialize_extensions(app, common_extensions)
     initialize_extensions(app, extensions)
-    configure_logging(app)
+    #configure_logging(app)
 
     return app
