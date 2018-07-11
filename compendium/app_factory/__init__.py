@@ -32,6 +32,5 @@ def create_app(package_name, package_path, settings_override=None,
 
     initialize_extensions(app, common_extensions)
     initialize_extensions(app, extensions)
-    #configure_logging(app)
 
     return app

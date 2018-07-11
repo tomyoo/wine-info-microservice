@@ -24,80 +24,63 @@ class VintageResource(Resource):
     def get(self, vintage_id):
         """ Retrieve the information about a sku, like a bottle """
 
-        if int(vintage_id) == 42070:
-            raise ApiException(Failures.other_error)
+        vintage = get_vintage_by_id(vintage_id)
 
-        elif int(vintage_id) == 42069:
-            with open(os.path.dirname(os.path.abspath(__file__)) +
-                      '/testing/42069.json'.format(vintage_id),
-                      'rb') as jsonfile:
-                vintages_json = jsonfile.read().decode("utf-8")
+        regions = [vintage.region.name]
+        if vintage.region.parent_id:
+            regions.append(get_region_by_id(vintage.region.parent_id).name)
 
-            schema = VintageSchema()
+        grapes = []
+        for grape in vintage.grapes:
+            grapes.append(grape.name)
 
-            response, response_errors = schema.loads(vintages_json)
-            return response
+        tastes = []
+        for taste in vintage.tastes:
+            tastes.append(taste.name)
 
+        pairings = []
+        for pairing in vintage.pairings:
+            pairings.append(pairing.name)
 
-        else:
+        traits = []
+        for trait in vintage.traits:
+            traits.append(trait.name)
 
-            vintage = get_vintage_by_id(vintage_id)
-
-            regions = [vintage.region.name]
-            if vintage.region.parent_id:
-                regions.append(get_region_by_id(vintage.region.parent_id).name)
-
-            grapes = []
-            for grape in vintage.grapes:
-                grapes.append(grape.name)
-
-            tastes = []
-            for taste in vintage.tastes:
-                tastes.append(taste.name)
-
-            pairings = []
-            for pairing in vintage.pairings:
-                pairings.append(pairing.name)
-
-            traits = []
-            for trait in vintage.traits:
-                traits.append(trait.name)
-
-            wine_dict = {'id': vintage.id,
-                         'year': vintage.year,
-                         'short_tasting_note': vintage.short_tasting_note,
-                         'tasting_note': vintage.tasting_note,
-                         'abv': vintage.abv,
-                         'attributes': {
-                             'body': vintage.body,
-                             'fruit': vintage.fruit,
-                             'earth': vintage.earth,
-                             'tannin': vintage.tannin,
-                             'oak': vintage.oak,
-                             'acidity': vintage.acidity
+        wine_dict = {'id': vintage.id,
+                     'year': vintage.year,
+                     'short_tasting_note': vintage.short_tasting_note,
+                     'tasting_note': vintage.tasting_note,
+                     'abv': vintage.abv,
+                     'attributes': {
+                         'body': vintage.body,
+                         'fruit': vintage.fruit,
+                         'earth': vintage.earth,
+                         'tannin': vintage.tannin,
+                         'oak': vintage.oak,
+                         'acidity': vintage.acidity
+                     },
+                     'region': regions,
+                     'grapes': grapes,
+                     'tastes': tastes,
+                     'pairings': pairings,
+                     'traits': traits,
+                     'wine': {
+                         'name': vintage.wine.name,
+                         'brand': vintage.wine.brand.name,
+                         'variety': {
+                             'name': vintage.wine.variety.name,
+                             'type': vintage.wine.variety.type.value
                          },
-                         'region': regions,
-                         'grapes': grapes,
-                         'tastes': tastes,
-                         'pairings': pairings,
-                         'traits': traits,
-                         'wine': {
-                             'name': vintage.wine.name,
-                             'brand': vintage.wine.brand.name,
-                             'variety': {
-                                 'name': vintage.wine.variety.name,
-                                 'type': vintage.wine.variety.type.value
-                             },
-                             'classification': {
-                                 'name': vintage.wine.classification.name,
-                                 'type': vintage.wine.classification.type.value
-                             }
-                         }}
+                         'classification': {
+                             'name': vintage.wine.classification.name,
+                             'type': vintage.wine.classification.type.value
+                         }
+                     }}
 
-            wine_json = json.dumps(wine_dict)
+        wine_json = json.dumps(wine_dict)
 
-            schema = VintageSchema()
+        schema = VintageSchema()
 
-            response, response_errors = schema.loads(wine_json)
+        response, response_errors = schema.loads(wine_json)
 
-            return response
+        return response

@@ -26,22 +26,6 @@ class ClassificationSchema(schemas.Schema):
     type = schemas.String()
 
 
-class GrapeSchema(schemas.Schema):
-    name = schemas.String()
-
-
-class TasteSchema(schemas.Schema):
-    name = schemas.String()
-
-
-class PairingSchema(schemas.Schema):
-    name = schemas.String()
-
-
-class TraitSchema(schemas.Schema):
-    name = schemas.String()
-
-
 class WineSchema(schemas.Schema):
     name = schemas.String()
     brand = schemas.String()
